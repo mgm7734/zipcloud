@@ -2,7 +2,7 @@
   <body>
     <p>
       <% states.each { state -> %>
-        <span data="${ state.zipCount }">
+        <span style="font-size: ${ state.fontSize };">
 	  ${ state.name }
 	</span>
       <% } %>
