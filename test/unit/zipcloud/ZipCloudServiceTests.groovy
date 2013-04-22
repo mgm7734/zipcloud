@@ -23,7 +23,7 @@ class ZipCloudServiceTests {
   }
   
   def testgetCloudDataHappyPath() {
-    def result = service.calculateCloudData()
+    def result = service.stateNameAndZipCounts()
 
     assertEquals( [ [state: "MN", zipCount: 9],
 		    [state: "WI", zipCount: 5] ],
