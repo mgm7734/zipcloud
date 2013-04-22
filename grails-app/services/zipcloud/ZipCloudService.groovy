@@ -35,4 +35,13 @@ class ZipCloudService {
 		st.refreshedAt = new Date()
 		st.save(flush: true)
 	}
+	
+	def refreshedAt() {
+		State.withCriteria(uniqueResult: true) {
+			projections { 
+				min('refreshedAt')
+			}
+		}.first()
+	}
+	
 }

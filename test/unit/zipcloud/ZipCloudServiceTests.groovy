@@ -22,11 +22,22 @@ class ZipCloudServiceTests {
     mn.save(flush: true)
   }
   
-  def testgetCloudDataHappyPath() {
+  def testStateNameAndZipCountsHappyPath() {
     def result = service.stateNameAndZipCounts()
 
     assert [ [name: "Minnesota", zipCount: 9],
 		     [name: "Wisconsin", zipCount: 5]
 		   ] == result
+  }
+  
+  def testRefreshZipDataHappyPath() {
+	  assert null == service.refreshedAt()
+	  
+	  def mn = State.findByCode('MN')
+	  def now = new Date()
+	  mn.refreshedAt = now
+	  mn.save(flush: true)
+	  
+	  assert now == service.refreshedAt()
   }
 }
