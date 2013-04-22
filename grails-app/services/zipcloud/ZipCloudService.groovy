@@ -3,8 +3,8 @@ package zipcloud
 import org.springframework.web.client.RestClientException
 
 class ZipCloudService {
-  def geoDataService
-  
+	def geoDataService
+
 	def stateNameAndZipCounts() {
 		State.list(sort: "name").collect {
 			[name:     it.name,
@@ -25,8 +25,10 @@ class ZipCloudService {
 
 	def refreshZipDataForState(State st) {
 		def resp = geoDataService.zipCodeDataForState(st.code)
-		if (resp == []) return
-			ZipCodeArea.where { state == st }.deleteAll()
+		if (resp == []) { 
+			return
+		}
+		ZipCodeArea.where { state == st }.deleteAll()
 		resp.each { data ->
 			st.addToZipCodeAreas( new ZipCodeArea(code: data.postalCode) )
 		}

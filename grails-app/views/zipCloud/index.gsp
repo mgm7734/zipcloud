@@ -1,4 +1,7 @@
 <html>
+  <head>
+  <link type="text/css" href="${resource(dir: 'css', file: 'main.css')}" />
+    </head>
   <body>
   	<div>
   	  <g:form name="refresh" url="[controller: 'zipCloud', action: 'refresh']">
@@ -7,9 +10,8 @@
   	</div>  	
     <p>
       <% states.each { state -> %>
-        <a href="#" style="font-size: ${ state.fontSize };" title="${ state.zipCount }">
-		  ${ state.name }
-		</a>
+        <a class="zipCloud href="#" style="font-size: ${ state.fontSize };" title="${ state.zipCount }"
+		  >${ state.name }</a>
       <% } %>
     </p>
   </body>

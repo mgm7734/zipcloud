@@ -594,3 +594,8 @@ a.skip {
 	position: absolute;
 	left: -9999px;
 }
+
+a.zipcloud:link, a.zipcloud:visited, a.zipcloud:hover {
+	color: black;
+	text-decoration: none;
+}
