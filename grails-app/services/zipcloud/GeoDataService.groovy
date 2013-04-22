@@ -24,7 +24,7 @@ class GeoDataService {
       resp.json.postalCodes
     }
     else {
-      log.warning "HTTP error retrieving data for ${stateCode}: ${resp.status}, ${resp.text}"
+      log.warn "HTTP error retrieving data for ${stateCode}: ${resp.status}, ${resp.text}"
       []
     }
   }

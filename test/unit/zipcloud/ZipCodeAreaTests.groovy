@@ -11,7 +11,6 @@ import org.junit.*
 @TestFor(ZipCodeArea)
 class ZipCodeAreaTests {
 
-    void testSomething() {
-       fail "Implement me"
+    void testNothing() {
     }
 }

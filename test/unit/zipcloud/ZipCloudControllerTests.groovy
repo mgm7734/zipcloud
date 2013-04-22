@@ -1,24 +1,26 @@
 package zipcloud
 
-import grails.test.mixin.*
-import org.junit.*
-
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
 @TestFor(ZipCloudController)
 class ZipCloudControllerTests {
 
-  def testIndex() {
-    def expectedData = [["MN": 10], ["BB": 40]]
-    def mc = mockFor(ZipCloudService)
-    mc.demand.calculateCloudData { expectedData }
+	void testIndex() {
+		def ctl = mockFor(ZipCloudService)
+		ctl.demand.stateNameAndZipCounts() { ->
+			[ [name: "MN", zipCount: 10],
+			  [name: "OP", zipCount: 25],
+			  [name: "QR", zipCount: 40] ]
+		}
+		def controller = new ZipCloudController()
+		controller.zipCloudService = ctl.createMock()
 
-    def controller = new ZipCloudController()
-    controller.zipCloudService = mc.createMock()
+		def model = controller.index();
 
-    def model = controller.index();
-
-    assert model == expectedData
-  }
+		assert model == 
+			[ states: [ [name: "MN", fontSize:  8, zipCount: 10],
+						[name: "OP", fontSize: 19, zipCount: 25],
+						[name: "QR", fontSize: 30, zipCount: 40] ] ]
+	}
 }
